@@ -18,7 +18,7 @@ class WorkoutRequest(BaseModel):
 def generate_workout(req: WorkoutRequest):
     try:
         model = genai.GenerativeModel(os.getenv("GEMINI_WORKOUT_MODEL", "gemini-1.5-flash"))
-        prompt = f"You are FitBuddy AI. Create workout for Age {req.age}, Weight {req.weight}kg, Goal {req.goal}. Give 3 exercises with sets and reps."
+       prompt = f"You are FitBuddy AI. Create a full Monday to Friday workout plan for Age {req.age}, Weight {req.weight}kg, Goal {req.goal}. For each day give Day name, 3 exercises with sets and reps, and 1 diet tip."
         res = model.generate_content(prompt)
         return {"plan": res.text}
     except Exception as e:
